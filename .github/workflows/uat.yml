@@ -151,6 +151,43 @@ jobs:
     needs: build-and-push
 
     steps:
+      - name: Create UAT .env file
+        run: |
+          cat <<EOF > .env
+          # Application
+          APP_NAME=Risevale Tour API
+          SECRET_KEY=${{ secrets.SECRET_KEY }}
+          BASE_API_URL=https://api.risevale.co.ke
+          ENVIRONMENT=uat
+
+          # Company Info
+          COMPANY_NAME=Risevale Tours
+          COMPANY_EMAIL=info@risevale.co.ke
+          COMPANY_PHONE=+254-XXX-XXX-XXX
+          COMPANY_ADDRESS=Nairobi, Kenya
+          COMPANY_WEBSITE=https://risevale.co.ke
+
+          # Database
+          DATABASE_URI=${{ secrets.DATABASE_URI }}
+
+          # Authentication
+          ACCESS_TOKEN_EXP_MINUTES=10080
+          REFRESH_TOKEN_EXP_DAYS=30
+
+          # Test User (optional in UAT)
+          TEST_USER_EMAIL=${{ secrets.TEST_USER_EMAIL }}
+          TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}
+
+          # GCP
+          GCP_PUBLIC_BUCKET=koomovers
+          GCP_PRIVATE_BUCKET=koomovers-kyc
+
+          # Logging
+          LOG_LEVEL=INFO
+          LOG_FILE=/var/log/app/app.log
+          EOF
+          printf '%s' "${{ secrets.GCLOUD_SERVICE_KEY_BASE64 }}" | base64 -d > service-account.json
+          
       - name: Deploy API
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
