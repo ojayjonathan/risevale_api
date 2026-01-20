@@ -1,0 +1,17 @@
+venv
+.vscode
+*__pycache__*
+*.db
+*.pytest_cache
+.coverage
+media/*/*
+.git/
+.pytest_cache/
+__pycache__/
+*/node_modules/
+*/build/
+public/
+public_collected/
+.dockerignore
+.env*
+celerybeat-schedule

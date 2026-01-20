@@ -1,0 +1,168 @@
+# =============================================================================
+# KOO MOVERS SOLUTION - Git Ignore File
+# =============================================================================
+
+# Environment files (NEVER commit these)
+.idea
+.env
+.env.local
+.env.production
+.env.test
+.env.*.local
+test.log
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Media files (user uploads)
+media/uploads/
+media/documents/
+media/images/
+media/temp/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# SSL certificates
+ssl/
+*.pem
+*.key
+*.crt
+
+# Backups
+backups/
+*.dump
+
+# Testing
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+htmlcov/
+.coverage.*
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Documentation
+docs/_build/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Firebase
+firebase-adminsdk-*.json
+serviceAccountKey.json
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Security files
+*.p12
+*.pfx
+
+# Local configuration
+local_settings.py
+settings_local.py
+config/db/service-account.json
+service-account.json
+# Docker
+
+# Kubernetes
+*.yaml.local
+*.yml.local
+.env.backups
+venv
+.vscode
+*__pycache__*
+*.pytest_cache
+media/*/*
+*celerybeat**
+dump.rdb
+.idea
+htmlcov
+test.db

@@ -1,0 +1,59 @@
+services:
+  api:
+    image: ghcr.io/ojayjonathan/risevale.co.ke:latest
+    env_file:
+      - .env
+    restart: always
+    depends_on:
+      - db
+    container_name: api.risevale.co.ke
+    networks:
+      - koo_network
+
+  db:
+    restart: always
+    image: postgres:17-alpine
+    container_name: db.risevale.co.ke
+    ports:
+      - "127.0.0.1:5432:5432"
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # command: postgres -c archive_mode=on -c log_timezone='Africa/Nairobi' -c timezone='Africa/Nairobi' -c archive_command='pgbackrest --stanza=main archive-push %p'
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_TIMEZONE: Africa/Nairobi
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    networks:
+      - koo_network
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    container_name: nginx.risevale.co.ke
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/sites-enabled/:/etc/nginx/sites-enabled/
+      - ./config/nginx/nginxconfig.io/:/etc/nginx/nginxconfig.io/
+      - /var/www/static:/var/www/static:rw
+      - ./media:/var/www/media
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /var/www/html:/var/www/html
+      - /var/log/nginx:/var/log/nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - api.prod
+    networks:
+      - koo_network
+
+volumes:
+  postgres_data:
+
+networks:
+  koo_network:
+    driver: bridge
