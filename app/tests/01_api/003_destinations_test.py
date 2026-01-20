@@ -1,3 +1,4 @@
+import json
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -37,16 +38,24 @@ def create_destination(hotel_id, auth_headers):
     payload = {
         "name": "Nairobi National Park",
         "description": "Wildlife near the city",
-        "image": "nairobi_park.jpg",
-        "highlights": ["lions", "buffalo"],
-        "visitor_info": {"hours": "6am - 6pm"},
+        "highlights": "lions,buffalo",
+        "visitor_info": json.dumps({"hours": "6am - 6pm"}),
         "best_time": "June - October",
-        "city_id": 1,
-        "hotel_ids": [hotel_id],
+        "city_id": "1",
+        "hotel_ids": str(hotel_id),
     }
-    res = client.post("/destinations/", json=payload, headers=auth_headers)
+
+    with open("./app/tests/images/test.jpeg", "rb") as img:
+        res = client.post(
+            "/destinations/",
+            data=payload,
+            files={"image": ("test.jpeg", img, "image/jpeg")},
+            headers=auth_headers,
+        )
+
     assert res.status_code == 201
     return res.json()
+
 
 
 # ------------------------------------------------------------
@@ -93,19 +102,22 @@ def test_update_destination(get_test_db, auth_headers):
     update_payload = {
         "name": "Updated Park",
         "description": "Updated desc",
-        "image": None,
-        "highlights": ["updated"],
-        "visitor_info": {},
+        "highlights": "updated",
+        "visitor_info": json.dumps({}),
         "best_time": "All year",
-        "city_id": 1,
-        "hotel_ids": [hotel_id],
+        "city_id": "1",
+        "hotel_ids": str(hotel_id),
     }
 
     res = client.put(
-        f"/destinations/{created['id']}", json=update_payload, headers=auth_headers
+        f"/destinations/{created['id']}",
+        data=update_payload,
+        headers=auth_headers,
     )
+
     assert res.status_code == 200
     assert res.json()["name"] == "Updated Park"
+
 
 
 def test_delete_destination(get_test_db, auth_headers):
