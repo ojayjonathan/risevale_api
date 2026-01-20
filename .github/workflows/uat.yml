@@ -102,6 +102,9 @@ jobs:
 
           # Database
           DATABASE_URI=${{ secrets.DATABASE_URI }}
+          POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+          POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+          POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
 
           # Authentication
           ACCESS_TOKEN_EXP_MINUTES=10080
@@ -169,6 +172,9 @@ jobs:
 
           # Database
           DATABASE_URI=${{ secrets.DATABASE_URI }}
+          POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+          POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+          POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
 
           # Authentication
           ACCESS_TOKEN_EXP_MINUTES=10080
@@ -187,7 +193,7 @@ jobs:
           LOG_FILE=/var/log/app/app.log
           EOF
           printf '%s' "${{ secrets.GCLOUD_SERVICE_KEY_BASE64 }}" | base64 -d > service-account.json
-          
+
       - name: Deploy API
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -212,8 +218,8 @@ jobs:
             docker pull ghcr.io/$GH_USERNAME/api.risevale.co.ke:latest
 
             echo "Restart API"
-            cd /root/sales_management
-            docker compose -f docker-compose.prod.yml up -d api.prod
+            cd /root/api.risevale.co.ke
+            docker compose -f docker-compose.prod.yml up -d api
 
             echo "Run migrations"
             docker exec api.risevale.co.ke alembic upgrade head
