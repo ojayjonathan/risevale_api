@@ -210,7 +210,9 @@ jobs:
           scp -i key.pem -o StrictHostKeyChecking=no service-account.json root@$SSH_HOST:/root/api.risevale.co.ke/service-account.json
           
 
-          ssh -i key.pem -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST << 'EOF'
+          ssh -i key.pem -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST << EOF
+            set -Eeuo pipefail
+
             echo "Login to GHCR"
             echo $GHCR_PAT | docker login ghcr.io -u $GH_USERNAME --password-stdin
 

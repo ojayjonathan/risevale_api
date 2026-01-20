@@ -1,6 +1,6 @@
 services:
   api:
-    image: ghcr.io/ojayjonathan/risevale.co.ke:latest
+    image: ghcr.io/ojayjonathan/api.risevale.co.ke:latest
     env_file:
       - .env
     restart: always
@@ -29,7 +29,12 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     networks:
       - koo_network
-
+  dashboard:
+    image: ghcr.io/ojayjonathan/dashboard.risevale.co.ke:latest
+    restart: always
+    container_name: dashboard.risevale.co.ke
+    networks:
+      - koo_network
   nginx:
     image: nginx:alpine
     restart: always
@@ -48,6 +53,7 @@ services:
       - "443:443"
     depends_on:
       - api
+      - dashboard
     networks:
       - koo_network
 
