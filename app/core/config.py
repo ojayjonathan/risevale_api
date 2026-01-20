@@ -3,7 +3,7 @@ from functools import lru_cache
 from typing import Optional, Union
 
 from pydantic import PostgresDsn
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Environment(str, Enum):
@@ -62,9 +62,9 @@ class Settings(BaseSettings):
     GCP_PUBLIC_BUCKET: str
     MEDIA_BASE: str = "media"
 
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
+    model_config = SettingsConfigDict(
+        extra="allow", env_file=".env", env_file_encoding="utf-8", case_sensitive=True
+    )
 
 
 @lru_cache()
