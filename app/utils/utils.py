@@ -53,7 +53,7 @@ def upload_image(
     file: UploadFile | None,
     path_prefix: str = "test",
     use_gcp: bool = True,
-    is_public: bool = False,
+    is_public: bool = True,
 ) -> Optional[str]:
     settings = get_settings()
 
