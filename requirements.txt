@@ -13,3 +13,5 @@ Jinja2==3.1.6
 pydantic[email]
 python-multipart
 google-cloud-storage
+alembic-postgresql-enum==1.8.0
+alembic==1.18.1
