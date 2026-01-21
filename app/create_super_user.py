@@ -26,8 +26,6 @@ def create_super_user():
             email=email,
             full_name=full_name,
             password=hash_password(password),
-            is_superuser=True,
-            is_active=True,
         )
 
         db.add(super_user)

@@ -6,7 +6,7 @@ from .destination import Destination, destination_hotels
 from .hotel import HotelReview, Hotel
 from .setups import Country, City
 from .user import User
-
+from .tour_booking import  TourBooking
 __all__ = [
     "BaseDBModel",
     "User",

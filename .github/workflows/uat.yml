@@ -41,7 +41,7 @@ jobs:
           COMPANY_EMAIL=info@risevale.co.ke
           COMPANY_PHONE=+254-XXX-XXX-XXX
           COMPANY_ADDRESS=Nairobi, Kenya
-          COMPANY_WEBSITE=https://risevale.co.ke
+          COMPANY_WEBSITE=https://api.risevaletravel.co.ke
 
           # Database
           DATABASE_URI=sqlite:///./test.db
@@ -98,7 +98,7 @@ jobs:
           COMPANY_EMAIL=info@risevale.co.ke
           COMPANY_PHONE=+254-XXX-XXX-XXX
           COMPANY_ADDRESS=Nairobi, Kenya
-          COMPANY_WEBSITE=https://risevale.co.ke
+          COMPANY_WEBSITE=https://api.risevaletravel.co.ke
 
           # Database
           DATABASE_URI=${{ secrets.DATABASE_URI }}
@@ -168,7 +168,7 @@ jobs:
           COMPANY_EMAIL=info@risevale.co.ke
           COMPANY_PHONE=+254-XXX-XXX-XXX
           COMPANY_ADDRESS=Nairobi, Kenya
-          COMPANY_WEBSITE=https://risevale.co.ke
+          COMPANY_WEBSITE=https://api.risevaletravel.co.ke
 
           # Database
           DATABASE_URI=${{ secrets.DATABASE_URI }}
